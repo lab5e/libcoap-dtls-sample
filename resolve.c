@@ -1,3 +1,4 @@
+#include <arpa/inet.h>
 #include <netdb.h>
 #include <stdio.h>
 #include <string.h>
@@ -11,13 +12,13 @@ bool resolve_address(const char *addrstr, struct sockaddr *dst) {
 
   memset(&hints, 0, sizeof(hints));
   hints.ai_socktype = SOCK_DGRAM;
-  hints.ai_family = AF_INET;
+  hints.ai_family = AF_UNSPEC;
 
   if (getaddrinfo(addrstr, NULL, &hints, &info) < 0) {
     printf("Could not look up hostname %s\n", addrstr);
     return false;
   }
-
   memcpy(dst, info->ai_addr, info->ai_addrlen);
+  freeaddrinfo(info);
   return true;
 }

@@ -12,7 +12,7 @@
 #define KEEPALIVE_SECONDS 10
 #define BLOCK_MODE (COAP_BLOCK_1)
 
-#define SERVER_ADDR "192.168.1.8"
+#define SERVER_ADDR "data.lab5e.com"
 #define SERVER_PORT 5684
 
 /**
