@@ -107,13 +107,19 @@ int main(int argc, char **argv) {
   memset(&dtls, 0, sizeof(dtls));
   dtls.version = COAP_DTLS_PKI_SETUP_VERSION;
 
+  // Note the depth of validation; this is the max number of intermediate and
+  // root certificates it will validate before giving up. If you set this to 1
+  // the server certificate validation will fail since there is at least
+  // one intermediate certificate between the root certificate and the server
+  // certificate.
+
   dtls.verify_peer_cert = 1;        // Verify peer certificate
   dtls.require_peer_cert = 1;       // Require a server certificate
   dtls.allow_self_signed = 1;       // Allow self signed certificate
   dtls.allow_expired_certs = 0;     // No expired certificates
   dtls.cert_chain_validation = 1;   // Validate the chain
-  dtls.cert_chain_verify_depth = 3; // Depth of validation
   dtls.check_cert_revocation = 0;   // Check the revocation list
+  dtls.cert_chain_verify_depth = 2; // Depth of validation.
 
   dtls.validate_cn_call_back = NULL;  // CN callback (not used)
   dtls.cn_call_back_arg = NULL;       // CN callback
