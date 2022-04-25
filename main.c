@@ -176,7 +176,7 @@ int main(int argc, char **argv) {
 
   // Add the payload to the PDU
   const char *data = "this is the payload";
-  coap_add_data(request, sizeof(data), data);
+  coap_add_data(request, strlen(data), data);
 
   // Send it
   coap_tid_t tid = coap_send(session, request);
